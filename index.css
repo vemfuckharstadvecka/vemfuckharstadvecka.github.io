@@ -1,0 +1,32 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Parent container styles */
+#parentA, #parentB {
+    height: 50vh; /* Each parent takes up half of the viewport height */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
+    align-items: center; /* Horizontally center the content */
+    box-sizing: border-box;
+}
+
+#parentA {
+    background-color: #c1fea8; /* Light blue background */
+}
+
+#parentB {
+    background-color: #c1fea8; /* White background */
+}
+
+/* Text styles for all divs */
+div {
+    color: #064500; /* Blue text color */
+    font-size: 50px;
+    margin: 5px 0;
+}
