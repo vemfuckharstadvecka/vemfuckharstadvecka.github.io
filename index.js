@@ -11,7 +11,7 @@ async function fetchAndDisplayQuote() {
         const nextWorkersIds = guardABs[await whoseTurn(startWeek, true)].split(' ');
         console.log(currentWorkersIds[0]);
         console.log(currentWorkersIds[1]);
-        document.getElementById('guardA').textContent = "Soppor: " + getNameByNumber(currentWorkersIds[0], namesWithIds);
+        document.getElementById('guardA').textContent = "Sopor: " + getNameByNumber(currentWorkersIds[0], namesWithIds);
         document.getElementById('guardB').textContent = "Bänk: " + getNameByNumber(currentWorkersIds[1], namesWithIds);
         document.getElementById('nGuardA').textContent = "Nästa: " + getNameByNumber(nextWorkersIds[0], namesWithIds);
         document.getElementById('nGuardB').textContent = "Nästa: " + getNameByNumber(nextWorkersIds[1], namesWithIds);
