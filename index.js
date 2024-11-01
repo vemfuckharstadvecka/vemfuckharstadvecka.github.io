@@ -17,7 +17,7 @@ async function fetchAndDisplayQuote() {
         const lineToShow = weekNumber % lines.length;
         
         // Display the quote
-        document.getElementById('quote').textContent = lines[lineToShow];
+        document.getElementById('quote').textContent = "ja det fungerade";//lines[lineToShow];
     } catch (error) {
         console.error('Error:', error);
         document.getElementById('quote').textContent = 'Error loading quote';
