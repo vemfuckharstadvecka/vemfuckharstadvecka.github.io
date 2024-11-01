@@ -1,6 +1,6 @@
 async function fetchAndDisplayQuote() {
     try {
-        const startWeek = 41;
+        const startWeek = 44;
         // Fetch the text file
         const responseSchedule = await readFile('vem.txt');
         const responseRoomId = await readFile('namn.txt');
