@@ -24,9 +24,10 @@ body {
     background-color: #c1fea8; /* White background */
 }
 
+
 /* Text styles for all divs */
 div {
     color: #064500; /* Blue text color */
-    font-size: 50px;
+    font-size: 25px;
     margin: 5px 0;
 }
