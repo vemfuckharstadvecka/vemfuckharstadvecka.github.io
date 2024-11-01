@@ -25,7 +25,7 @@ async function whoseTurn(startWeek) {
     const timeDiff = currentDate - startDate;
     const weekNumber = Math.floor(timeDiff / (7 * 24 * 60 * 60 * 1000)) + 1;
     console.log(weekNumber);
-    return weekNumber-startWeek-1;
+    return weekNumber-startWeek;
     // Update if new week is bigger
 }
 // Read entire file
