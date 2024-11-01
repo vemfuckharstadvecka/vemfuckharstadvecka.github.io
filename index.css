@@ -1,4 +1,4 @@
-body {
+wbody {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -28,13 +28,13 @@ body {
 /* Text styles for all divs */
 div {
     color: #064500; /* Blue text color */
-    font-size: clamp(25px, 20vw, 25px);
+    font-size: 27px;
     margin: 5px 0;
 }
 
 @media screen and (max-width: 768px) {
     div {
-        font-size: clamp(18px, 6vw, 28px);
+        font-size: 18px;
         margin: 10px 0;
     }
 }
@@ -42,7 +42,7 @@ div {
 /* Small mobile devices */
 @media screen and (max-width: 480px) {
     div {
-        font-size: clamp(16px, 7vw, 32px);
+        font-size: 16px;
         margin: 12px 0;
     }
 }
