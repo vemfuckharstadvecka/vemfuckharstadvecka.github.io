@@ -17,6 +17,7 @@ async function fetchAndDisplayQuote() {
         const lineToShow = weekNumber % lines.length;
         
         // Display the quote
+        console.log(lines[lineToShow]);
         document.getElementById('quote').textContent = lines[lineToShow];
     } catch (error) {
         console.error('Error:', error);
