@@ -28,8 +28,11 @@ body {
 /* Text styles for all divs */
 div {
     color: #ebedef; /* Blue text color */
-    font-size: 50%;
     margin: 0px 0;
+}
+
+.text {
+    font-size: 40%;
 }
 
 
