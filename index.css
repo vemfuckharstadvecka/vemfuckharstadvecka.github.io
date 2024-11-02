@@ -28,21 +28,21 @@ body {
 /* Text styles for all divs */
 div {
     color: #ebedef; /* Blue text color */
-    font-size: 27px;
+    font-size: clamp(18px, 4vw, 27px);
     margin: 0px 0;
 }
 
 @media screen and (max-width: 768px) {
     div {
-        font-size: 18px;
-        margin: 10px 0;
+        clamp(16px, 3.5vw, 22px);
+        margin: 0px 0;
     }
 }
 
 /* Small mobile devices */
 @media screen and (max-width: 480px) {
     div {
-        font-size: 20px;
-        margin: 12px 0;
+        font-size: clamp(16px, 3vw, 20px);
+        margin: 0px 0;
     }
 }
