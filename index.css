@@ -29,7 +29,7 @@ body {
 div {
     color: #f8f9f9; /* Blue text color */
     font-size: 27px;
-    margin: 5px 0;
+    margin: 0px 0;
 }
 
 @media screen and (max-width: 768px) {
