@@ -48,4 +48,10 @@ div {
     }
 }
 
+#guardA {
+    padding: 10px;
+}
+#guardB {
+    padding: 10px;
+}
 /* Ensure proper text scaling */
