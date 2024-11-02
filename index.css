@@ -37,14 +37,14 @@ div {
 /* Mobile responsiveness */
 @media screen and (max-width: 768px) {
     .text {
-        font-size: 1.5rem;
+        font-size:2rem;
     }
 }
 
 /* For smaller phones */
 @media screen and (max-width: 480px) {
     .text {
-        font-size: 1.4rem;
+        font-size: 3rem;
     }
 }
 
