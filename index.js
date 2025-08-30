@@ -1,6 +1,6 @@
 async function fetchAndDisplayQuote() {
     try {
-        const startWeek = 44;
+        const startWeek = 35;
         // Fetch the text file
         const responseSchedule = await readFile('vem.txt');
         const responseRoomId = await readFile('namn.txt');
@@ -23,7 +23,7 @@ async function fetchAndDisplayQuote() {
 
 // Call the function when page loads
 async function whoseTurn(startWeek, isNext) {
-    const startDate = new Date('2024-01-01');
+    const startDate = new Date('2024-12-30');
     const currentDate = new Date();
     const timeDiff = currentDate - startDate;
     const weekNumber = Math.floor(timeDiff / (7 * 24 * 60 * 60 * 1000)) + 1;
