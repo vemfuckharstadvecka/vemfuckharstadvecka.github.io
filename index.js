@@ -1,57 +1,69 @@
-async function fetchAndDisplayQuote() {
+async function showSchedule() {
     try {
-        const startWeek = 35;
         // Fetch the text file
         const responseSchedule = await readFile('vem.txt');
         const responseRoomId = await readFile('namn.txt');
-        const guardABs = responseSchedule.split('\n').filter(line => line.trim() !== '');
-        const namesWithIds = responseRoomId.split('\n').filter(line => line.trim() !== '');
-        console.log(await whoseTurn(startWeek));
-        const currentWorkersIds = guardABs[await whoseTurn(startWeek, false)].split(' ');
-        const nextWorkersIds = guardABs[await whoseTurn(startWeek, true)].split(' ');
-        console.log(currentWorkersIds[0]);
-        console.log(currentWorkersIds[1]);
-        document.getElementById('guardA').textContent = "Sopor: " + getNameByNumber(currentWorkersIds[0], namesWithIds);
-        document.getElementById('guardB').textContent = "Bänk: " + getNameByNumber(currentWorkersIds[1], namesWithIds);
-        document.getElementById('nGuardA').textContent = "Nästa: " + getNameByNumber(nextWorkersIds[0], namesWithIds);
-        document.getElementById('nGuardB').textContent = "Nästa: " + getNameByNumber(nextWorkersIds[1], namesWithIds);
+
+        const now = new Date();
+        const today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+        
+        const guardABs = responseSchedule.split('\n').map(l => l.trim()).filter(Boolean);
+        const namesWithIds = responseRoomId.split('\n').map(l => l.trim()).filter(Boolean);
+        
+        const [currentA, currentB] = getNames(whoseTurnIndex(today, guardABs.length), guardABs, namesWithIds);
+        const [nextA, nextB] = getNames(whoseTurnIndex(today+MS_PER_WEEK, guardABs.length), guardABs, namesWithIds);
+        
+        document.getElementById('guardA').textContent = "Sopor: " + currentA;
+        document.getElementById('guardB').textContent = "Bänk: " + currentB;
+        document.getElementById('nGuardA').textContent = "Nästa: " + nextA;
+        document.getElementById('nGuardB').textContent = "Nästa: " + nextB;
     } catch (error) {
         console.error('Error:', error);
-        document.getElementById('quote').textContent = 'Error loading quote';
     }
 }
 
-// Call the function when page loads
-async function whoseTurn(startWeek, isNext) {
-    const startDate = new Date(2025, 12, 29);
-    const currentDate = new Date();
-    const timeDiff = currentDate - startDate;
-    const weekNumber = Math.floor(timeDiff / (7 * 24 * 60 * 60 * 1000)) + 1;
-    console.log(weekNumber);
-    const res = weekNumber -startWeek;
-    if (isNext) {
-        return res+1;
-    } else {
-        return res;
-    }
-    
-    // Update if new week is bigger
+const MS_PER_WEEK = 7*24*60*60*1000; // milliseconds in one week
+
+// Find the Monday on or after the given date (month is 0-indexed, 7=Aug)
+function mondayOnOrAfter(year, month, day) {
+    const d = new Date(Date.UTC(year, month, day));
+    return d.getTime() + ((8 - d.getUTCDay()) % 7) * 24 * 60 * 60 * 1000;
 }
+
+// Returns the line index in vem.txt, or null if it's summer break
+function whoseTurnIndex(date, length) {
+    let year = new Date(date).getUTCFullYear();
+    if (date < mondayOnOrAfter(year, 7, 28)) year--; // still in last academic year
+
+    const start = mondayOnOrAfter(year, 7, 28);
+    const end = mondayOnOrAfter(year + 1, 5, 1) + 2*MS_PER_WEEK; // second week of June
+
+    if (date >= end) return null; // summer break
+
+    const weekNumber = Math.floor((date - start) / MS_PER_WEEK); // week number
+
+    return weekNumber % length
+
+}
+
 // Read entire file
 async function readFile(filename) {
-    try {
-        const response = await fetch(filename);
-        const text = await response.text();
-        return text;
-    } catch (error) {
-        console.error('Error reading file:', error);
-        return null;
-    }
+    const response = await fetch(filename);
+    if (!response.ok) throw new Error(`Could not load ${filename}`);
+    return response.text();
 }
 
-function getNameByNumber(number, list1) {
-    const res = list1.find(entry => entry.startsWith(number + ' ')).split(" ")[1];
+// Get name by room ID
+function getNameByNumber(number, namesWithNumber) {
+    const res = namesWithNumber.find(entry => entry.startsWith(number + ' ')).split(" ")[1];
     console.log(res);
     return res;
 }
-fetchAndDisplayQuote();
+
+function getNames(index, schedule, namesWithIds) {
+    if (index == null) return ['Uppehåll', 'Uppehåll'];
+    const [a, b] = schedule[index].split(' ');
+    return [getNameByNumber(a, namesWithIds), getNameByNumber(b, namesWithIds)]
+}
+
+showSchedule();
